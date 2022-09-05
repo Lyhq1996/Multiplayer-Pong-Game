@@ -22,7 +22,15 @@ io.on('connection', (socket) => {
         if (readyPlayerCount === 2) {
             // broadcast to all connected users
             // choose the second player as the referee
-            io.emit('startGame', socket.io);
+            io.emit('startGame', socket.id);
         }
+    });
+
+    socket.on('paddleMove', (paddleData) => {
+        socket.broadcast.emit('paddleMove', paddleData);
+    });
+
+    socket.on('ballMove', (ballData) => {
+        socket.broadcast.emit('ballMove', ballData);
     });
 });
