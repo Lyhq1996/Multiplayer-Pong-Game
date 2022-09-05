@@ -19,7 +19,7 @@ io.on('connection', (socket) => {
     socket.on('ready', () => {
         console.log('Player ready', socket.id);
         readyPlayerCount++;
-        if (readyPlayerCount === 2) {
+        if (readyPlayerCount % 2 === 0) {
             // broadcast to all connected users
             // choose the second player as the referee
             io.emit('startGame', socket.id);
@@ -33,4 +33,8 @@ io.on('connection', (socket) => {
     socket.on('ballMove', (ballData) => {
         socket.broadcast.emit('ballMove', ballData);
     });
+
+    socket.on('disconnect', (reason) => {
+        console.log(`Client ${socket.id} disconnected: ${reason}`);
+    })
 });
