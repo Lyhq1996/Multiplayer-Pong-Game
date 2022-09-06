@@ -175,12 +175,12 @@ function gameOver() {
     console.log(socket.id);
     console.log(paddleIndex);
     // Set Winner
-    const winner = score[paddleIndex] === winningScore ? 'You win!' : 'You lose!';
-    showGameOverEl(winner);
+    const result = score[paddleIndex] === winningScore ? 'You win!' : 'You lose!';
+    showGameOverEl(result);
   }
 }
 
-function showGameOverEl(winner) {
+function showGameOverEl(result) {
   // Hide Canvas
   canvas.hidden = true;
   // Container
@@ -188,7 +188,7 @@ function showGameOverEl(winner) {
   gameOverEl.classList.add('game-over-container');
   // Title
   const title = document.createElement('h1');
-  title.textContent = `${winner}`;
+  title.textContent = `${result}`;
   // Button
   const playAgainBtn = document.createElement('button');
   playAgainBtn.setAttribute('onclick', 'startAgain()');
